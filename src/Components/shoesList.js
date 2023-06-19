@@ -1,7 +1,8 @@
 import { useState } from "react"
 import shoeData from "../data.js"
 
-function ShoesDetail () {
+
+function ShoesList () {
   const [ shoes ] = useState(shoeData)
   
 
@@ -20,4 +21,4 @@ function ShoesDetail () {
   )
 }
 
-export default ShoesDetail
+export default ShoesList
