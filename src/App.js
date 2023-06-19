@@ -2,6 +2,7 @@
 import './App.css';
 import { Navbar, Container, Nav} from 'react-bootstrap'
 import ShoesList from './Components/shoesList.js';
+import { Routes, Route, Link } from 'react-router-dom'
 
 
 function App() {
@@ -13,18 +14,27 @@ function App() {
         <Container>
         <Navbar.Brand href="#home">Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Link to="/" className='nav-link'>Home</Link>
+          <Link to="/detail" className='nav-link'>Detail</Link>
+          <Link to="/about" className='nav-link'>About</Link>
         </Nav>
         </Container>
       </Navbar>
-      <div className='main-bg'></div>
-      <div className="container">
-        <div className="row">
-          <ShoesList/>
-        </div>
-      </div>
+
+      <Routes>
+        <Route path='/' element={
+          <>
+          <div className='main-bg'></div>
+          <div className="container">
+            <div className="row">
+              <ShoesList/>
+            </div>
+          </div>
+          </>
+        }/>
+        <Route path='/detail' element={ <div>상세페이지임</div>}/>
+        <Route path='/about' element={ <div>어바웃페이지임</div>}/>
+      </Routes>
     </div>
   );
 }
