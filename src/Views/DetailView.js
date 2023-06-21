@@ -4,19 +4,23 @@ import shoeData from "../data.js"
 
 function DetailView() {
 
-  const shoes = useState(shoeData)
+  const [shoes] = useState(shoeData)
   const { shoeId } = useParams()
+
+  const shoe = shoes.find((x)=> {
+    return x.id === parseInt(shoeId)
+  })
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <img alt={`shoe${shoeId}`} src={`https://codingapple1.github.io/shop/shoes${parseInt(shoeId) + 1}.jpg`} width="100%" />
+          <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="100%" />
         </div>
-        <div className="col-md-6">
-          <h4 className="pt-5">{shoes[0][shoeId].title}</h4>
-          <p>{shoes[0][shoeId].content}</p>
-          <p>{shoes[0][shoeId].price}원</p>
+        <div className="col-md-6 mt-4">
+          <h4 className="pt-5">{shoe.title}</h4>
+          <p>{shoe.content}</p>
+          <p>{shoe.price}원</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>

@@ -22,7 +22,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
- 
+
       <Routes>
         <Route path='/' element={
           <>
