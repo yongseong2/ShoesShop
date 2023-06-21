@@ -1,6 +1,18 @@
 import { useParams } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import shoeData from "../data.js"
+import styled from 'styled-components'
+
+const Box = styled.div`
+  padding : 20px;
+  color : grey
+`
+
+const YellowBtn = styled.button`
+  background : yellow;
+  color : black;
+  padding : 10px;
+`
 
 function DetailView() {
 
@@ -10,7 +22,11 @@ function DetailView() {
   const shoe = shoes.find((x)=> {
     return x.id === parseInt(shoeId)
   })
-
+  
+  useEffect(()=> {
+    console.log('안녕')
+  })
+  
   return (
     <div className="container">
       <div className="row">
@@ -24,7 +40,11 @@ function DetailView() {
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
-      {/* 현재페이지는{ id } */}
+      <div>
+        <Box>
+          <YellowBtn>버튼임</YellowBtn>
+        </Box>
+      </div>
     </div>
   )
 }
