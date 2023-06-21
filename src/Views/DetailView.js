@@ -3,30 +3,40 @@ import { useState, useEffect } from "react"
 import shoeData from "../data.js"
 import styled from 'styled-components'
 
-const Box = styled.div`
-  padding : 20px;
-  color : grey
-`
+// const Box = styled.div`
+//   padding : 20px;
+//   color : grey
+// `
 
-const YellowBtn = styled.button`
+// const YellowBtn = styled.button`
+//   background : yellow;
+//   color : black;
+//   padding : 10px;
+// `
+
+const YellowBox = styled.div`
   background : yellow;
-  color : black;
-  padding : 10px;
+  color: black;
+  padding: 10px;
+  width: 100px;
+  height: 100px;
 `
 
 function DetailView() {
 
   const [shoes] = useState(shoeData)
   const { shoeId } = useParams()
+  const [ timer, setTimer ] = useState(true)
 
-  const shoe = shoes.find((x)=> {
+  const shoe = shoes.find((x) => {
     return x.id === parseInt(shoeId)
   })
-  
-  useEffect(()=> {
-    console.log('안녕')
+
+
+  useEffect(() => {
+    setTimeout(()=> { setTimer(false)}, 2000)
   })
-  
+
   return (
     <div className="container">
       <div className="row">
@@ -41,9 +51,14 @@ function DetailView() {
         </div>
       </div>
       <div>
-        <Box>
+        {/* <Box>
           <YellowBtn>버튼임</YellowBtn>
-        </Box>
+        </Box> */}
+        { 
+          timer === true ?
+          <YellowBox></YellowBox> 
+          : null
+        }
       </div>
     </div>
   )
