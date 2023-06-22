@@ -3,11 +3,39 @@ import shoeData from "../data.js"
 import { Link } from "react-router-dom"
 
 
+
 function ShoesList() {
   const [shoes, setShoes] = useState(shoeData)
 
   return (
     <>
+      <div className="d-flex justify-content-around mt-3 mb-3">
+        <button className="btn btn-secondary" onClick={() => {
+          const copyShoes = [...shoes]
+          copyShoes.sort((a, b) => {
+            return a.price - b.price
+          })
+          setShoes(copyShoes)
+
+        }}> 가격순 정렬하기 버튼 </button>
+
+        <button className="btn btn-secondary" onClick={() => {
+          const copyShoes = [...shoes]
+          copyShoes.sort((a, b) => {
+            if (a.title > b.title) {
+              return 1
+            }
+            if (a.title < b.title) {
+              return -1
+            }
+            return 0
+          })
+          setShoes(copyShoes)
+        }}
+        >이름순 정렬하기 버튼</button>
+      </div>
+
+
       {shoes.map((shoe) => {
         return (
           <div className="col-md-4" key={shoe.id}>
@@ -21,29 +49,6 @@ function ShoesList() {
           </div>
         )
       })}
-      <button onClick={() => {
-        const copyShoes = [...shoes]
-        copyShoes.sort((a, b) => {
-          return a.price - b.price
-        })
-        setShoes(copyShoes)
-
-      }}> 가격순 정렬하기 버튼 </button>
-
-      <button onClick={() => {
-        const copyShoes = [...shoes]
-        copyShoes.sort((a, b) => {
-          if (a.title > b.title) {
-            return 1
-          }
-          if (a.title < b.title) {
-            return -1
-          }
-          return 0
-        })
-        setShoes(copyShoes)
-      }}
-      >이름순 정렬하기 버튼</button>
     </>
   )
 }

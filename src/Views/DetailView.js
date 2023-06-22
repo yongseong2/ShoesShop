@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 import shoeData from "../data.js"
 import styled from 'styled-components'
 
+// styled component 실습
+
 // const Box = styled.div`
 //   padding : 20px;
 //   color : grey
@@ -14,36 +16,67 @@ import styled from 'styled-components'
 //   padding : 10px;
 // `
 
+// LifeCycle 실습
 const YellowBox = styled.div`
-  background : yellow;
+  background : #F8F067;
   color: black;
   padding: 10px;
-  width: 100px;
-  height: 100px;
+  text-align: center;
+  font-weight: bold;
 `
 
 function DetailView() {
-
   const [shoes] = useState(shoeData)
   const { shoeId } = useParams()
-  const [ timer, setTimer ] = useState(true)
-
+  const [timer, setTimer] = useState(true)
   const shoe = shoes.find((x) => {
     return x.id === parseInt(shoeId)
   })
+  const [text, setText] = useState('')
 
-
+  // useEffect
   useEffect(() => {
-    setTimeout(()=> { setTimer(false)}, 2000)
-  })
+    const browserTimer = setTimeout(() => { setTimer(false) }, 2000)
+    return () => {
+      clearTimeout(browserTimer) // 타이머를 제거함(안전하게 사용가능)
+    }
+  }, [])
+
+  // useEffect(()=> {
+  //   if (isNaN(text.trim())) {
+  //     window.alert('돌아가세요~')
+  //   }
+  // }, [text]) // 변화를 감지함
+
+  // functions
+  function getText(e) {
+    let inputText = e.target.value
+    if (isNaN(inputText.trim())) {
+      window.alert('돌아가세요~')
+      inputText = ""
+      return
+    }
+    setText(inputText)
+  }
 
   return (
     <div className="container">
+      {
+        timer === true ?
+          <YellowBox>2초 이내 구매시 할인</YellowBox>
+          : null
+      }
       <div className="row">
         <div className="col-md-6">
           <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="100%" />
         </div>
-        <div className="col-md-6 mt-4">
+        <div className="col-md-6 mt-4 text-center">
+          <input
+            onChange={getText}
+            // onChange={(e) => { setText(e.target.value) }}
+            value={text}
+            type="text" />
+          <p>{text}</p>
           <h4 className="pt-5">{shoe.title}</h4>
           <p>{shoe.content}</p>
           <p>{shoe.price}원</p>
@@ -54,11 +87,6 @@ function DetailView() {
         {/* <Box>
           <YellowBtn>버튼임</YellowBtn>
         </Box> */}
-        { 
-          timer === true ?
-          <YellowBox></YellowBox> 
-          : null
-        }
       </div>
     </div>
   )
