@@ -1,46 +1,98 @@
 import { useState } from "react"
-import  shoeData  from "../data.js"
+import shoeData from "../data.js"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 
 
 function ShoesList() {
   const [shoes, setShoes] = useState(shoeData)
+  let [ click, setClick ] = useState(0)
+  const [ clickFlag, setClickFlag ] = useState(true)
+  const [ loading , setLoading ] = useState(true)
 
   return (
     <>
-      <div className="d-flex justify-content-around mt-3 mb-3">
-        <button className="btn btn-secondary" onClick={() => {
-          const copyShoes = [...shoes]
-          copyShoes.sort((a, b) => {
-            return a.price - b.price
-          })
-          setShoes(copyShoes)
+      <div className="mt-3 mb-3">
+        <div className="btn-group col-md-12" role="group" aria-label="Sorting buttons">
+          <button className="btn btn-primary" onClick={() => {
+            const copyShoes = [...shoes]
+            copyShoes.sort((a, b) => {
+              return a.price - b.price
+            })
+            setShoes(copyShoes)
+          }}> 가격순 정렬하기 </button>
 
-        }}> 가격순 정렬하기 버튼 </button>
+          <button className="btn btn-secondary" onClick={() => {
+            const copyShoes = [...shoes]
+            copyShoes.sort((a, b) => {
+              if (a.title > b.title) {
+                return 1
+              }
+              if (a.title < b.title) {
+                return -1
+              }
+              return 0
+            })
+            setShoes(copyShoes)
+          }}
+          >이름순 정렬하기 </button>
 
-        <button className="btn btn-secondary" onClick={() => {
-          const copyShoes = [...shoes]
-          copyShoes.sort((a, b) => {
-            if (a.title > b.title) {
-              return 1
+          {
+            clickFlag === true ?
+            <button className="btn btn-primary" onClick={() => {
+            setLoading(false)
+            if (click === 0) {
+              axios({
+                method: 'get',
+                url: 'https://codingapple1.github.io/shop/data2.json'
+              })
+                .then((res) => {
+                  const copyShoes = [...shoes, ...res.data]
+                  setShoes(copyShoes)
+                  setLoading(true)
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+              setClick(click += 1)
             }
-            if (a.title < b.title) {
-              return -1
+            else if (click === 1) {
+              axios({
+                method: 'get',
+                url: 'https://codingapple1.github.io/shop/data3.json'
+              })
+                .then((res) => {
+                  const copyShoes = [...shoes, ...res.data]
+                  setShoes(copyShoes)
+                  setLoading(true)
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+              setClick(click += 1)
             }
-            return 0
-          })
-          setShoes(copyShoes)
-        }}
-        >이름순 정렬하기 버튼</button>
+            else {
+              alert('상품이 더이상 존재하지 않습니다.')
+              setClickFlag(false)
+              setLoading(true)
+            }
+          }}
+          >상품 불러오기</button> : null}
+        </div>
+
       </div>
 
 
-      {shoes.map((shoe) => {
+      {
+      loading === true ?
+      shoes.map((shoe) => {
         return (
           <div className="col-md-4" key={shoe.id}>
             <Link
               to={`/detail/${shoe.id}`}
+              state={{ shoes: shoes }}
+              key={shoe.id}
               className='nav-link'>
               <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="80%" />
             </Link>
@@ -48,7 +100,7 @@ function ShoesList() {
             <p> {shoe.price}원 </p>
           </div>
         )
-      })}
+      }) : <div className="text-center">로딩중입니다</div>}
     </>
   )
 }

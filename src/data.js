@@ -1,5 +1,3 @@
-import axios from "axios"
-
 const shoeData = [
   {
     id : 0,
@@ -22,18 +20,5 @@ const shoeData = [
     price : 130000
   }
 ]
-
-axios({
-  method:'get',
-  url:'https://codingapple1.github.io/shop/data2.json'
-})
-.then((res)=>{
-  res.data.forEach((el)=>{
-    shoeData.push(el)
-  })
-})
-.catch((err)=>{
-  console.log(err)
-})
 
 export default shoeData 

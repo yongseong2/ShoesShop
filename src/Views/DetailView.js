@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
-import shoeData from "../data.js"
+// import shoeData from "../data.js"
 import styled from 'styled-components'
 
 // styled component 실습
@@ -26,7 +26,9 @@ const YellowBox = styled.div`
 `
 
 function DetailView() {
-  const [shoes] = useState(shoeData)
+  // const [shoes] = useState(shoeData)
+  const location = useLocation()
+  const shoes = location.state.shoes
   const { shoeId } = useParams()
   const [timer, setTimer] = useState(true)
   const shoe = shoes.find((x) => {
