@@ -1,6 +1,9 @@
 import { Table } from "react-bootstrap"
+import { useSelector } from "react-redux"
 
 function CartView() {
+  const carts = useSelector((state) => state.cart)
+
   return (
     <div className="container">
       <h2 className="m-3 text-center ">user의 장바구니</h2>
@@ -14,12 +17,18 @@ function CartView() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>안녕</td>
-            <td>안녕</td>
-            <td>안녕</td>
-          </tr>
+          {
+            carts.map((cart) => {
+              return (
+                <tr key={cart.id}>
+                  <td>{cart.id}</td>
+                  <td>{cart.name}</td>
+                  <td>{cart.count}</td>
+                  <td><button>+</button></td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </Table>
     </div>

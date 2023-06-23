@@ -5,6 +5,7 @@ import ShoesList from './Components/shoesList.js';
 import { Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom'
 import DetailView from './Views/DetailView';
 import CartView from './Views/CartView'
+import {GiShoppingCart} from 'react-icons/gi'
 
 
 function App() {
@@ -19,7 +20,11 @@ function App() {
           <Nav className="me-auto">
             {/* <Link to="/detail/:id" className='nav-link'>Detail</Link> */}
             <Link to="/about" className='nav-link'>About</Link>
-            <Link to="/cart" className='nav-link'>장바구니</Link>
+          </Nav>
+          <Nav>
+            <Link to="/cart" className='nav-link'>
+              장바구니 <GiShoppingCart size="25"/>
+            </Link>
           </Nav>
         </Container>
       </Navbar>

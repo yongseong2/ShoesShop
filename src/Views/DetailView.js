@@ -109,7 +109,6 @@ function DetailView() {
         </Box> */}
       </div>
       <TabUi
-
       ></TabUi>
     </div>
   )
