@@ -2,6 +2,7 @@ import { useParams, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 // import shoeData from "../data.js"
 import styled from 'styled-components'
+import TabUi  from "../Components/tabUi"
 
 // styled component 실습
 
@@ -90,6 +91,7 @@ function DetailView() {
           <YellowBtn>버튼임</YellowBtn>
         </Box> */}
       </div>
+      <TabUi></TabUi>
     </div>
   )
 }

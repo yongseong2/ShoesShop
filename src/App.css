@@ -1,8 +1,8 @@
 /* .App {
   text-align: center;
-}
+} */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -42,4 +42,13 @@
   background-image: url('./img/bg.png');
   background-size: cover;
   background-position: center;
+}
+
+.start {
+  opacity: 0;
+}
+
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
