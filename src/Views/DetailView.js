@@ -99,7 +99,9 @@ function DetailView() {
           <YellowBtn>버튼임</YellowBtn>
         </Box> */}
       </div>
-      <TabUi></TabUi>
+      <TabUi
+
+      ></TabUi>
     </div>
   )
 }

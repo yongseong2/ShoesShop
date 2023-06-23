@@ -5,7 +5,6 @@ import axios from "axios"
 import { Spinner } from "react-bootstrap"
 
 
-
 function ShoesList() {
   const [shoes, setShoes] = useState(shoeData)
   let [click, setClick] = useState(0)
@@ -24,7 +23,7 @@ function ShoesList() {
             setShoes(copyShoes)
           }}> 가격순 정렬하기 </button>
 
-          <button className="btn btn-success" onClick={() => {
+          <button className="btn btn-danger" onClick={() => {
             const copyShoes = [...shoes]
             copyShoes.sort((a, b) => {
               if (a.title > b.title) {
@@ -41,7 +40,7 @@ function ShoesList() {
 
           {
             clickFlag === true ?
-              <button className="btn btn-danger" onClick={() => {
+              <button className="btn btn-warning" onClick={() => {
                 setLoading(false)
                 if (click === 0) {
                   axios({
