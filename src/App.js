@@ -14,9 +14,8 @@ function App() {
     <div>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#home" onClick={()=>{navigate('/')}}>Home</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={()=>{navigate('/')}} className='nav-link'>Home</Nav.Link>
             {/* <Link to="/detail/:id" className='nav-link'>Detail</Link> */}
             <Link to="/about" className='nav-link'>About</Link>
           </Nav>

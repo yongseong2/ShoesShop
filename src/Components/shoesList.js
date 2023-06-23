@@ -16,7 +16,7 @@ function ShoesList() {
     <>
       <div className="mt-3 mb-3">
         <div className="btn-group col-md-12" role="group" aria-label="Sorting buttons">
-          <button className="btn btn-primary" onClick={() => {
+          <button className="btn btn-warning" onClick={() => {
             const copyShoes = [...shoes]
             copyShoes.sort((a, b) => {
               return a.price - b.price
@@ -24,7 +24,7 @@ function ShoesList() {
             setShoes(copyShoes)
           }}> 가격순 정렬하기 </button>
 
-          <button className="btn btn-secondary" onClick={() => {
+          <button className="btn btn-success" onClick={() => {
             const copyShoes = [...shoes]
             copyShoes.sort((a, b) => {
               if (a.title > b.title) {
@@ -41,7 +41,7 @@ function ShoesList() {
 
           {
             clickFlag === true ?
-              <button className="btn btn-primary" onClick={() => {
+              <button className="btn btn-danger" onClick={() => {
                 setLoading(false)
                 if (click === 0) {
                   axios({

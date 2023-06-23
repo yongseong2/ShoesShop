@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Nav } from "react-bootstrap"
 
 function TabUi() {
@@ -24,23 +24,41 @@ function TabUi() {
   )
 }
 
+// function TabContent(props) {
+//   const tab = props.tab
+//   if (tab === 0) {
+//     return (
+//       <div className="text-center">내용1</div>
+//     )
+//   }
+//   if (tab === 1) {
+//     return (
+//       <div className="text-center">내용2</div>
+//     )
+//   }
+//   if (tab === 2) {
+//     return (
+//       <div className="text-center">내용3</div>
+//     )
+//   }
+// }
+
 function TabContent(props) {
+  const [fade, setFade] = useState(0)
   const tab = props.tab
-  if (tab === 0) {
-    return (
-      <div className="text-center">내용1</div>
-    )
-  }
-  if (tab === 1) {
-    return (
-      <div className="text-center">내용2</div>
-    )
-  }
-  if (tab === 2) {
-    return (
-      <div className="text-center">내용3</div>
-    )
-  }
+
+  useEffect(() => {
+    setTimeout(() => { setFade('end') }, 100)
+    return () => {
+      setFade('')
+    }
+  }, [tab])
+
+  return (
+    <div className={`start ${fade} text-center`}>
+      {[<div>내용1</div>, <div>내용2</div>, <div>내용3</div>][tab]}
+    </div>
+  )
 }
 
 

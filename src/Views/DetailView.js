@@ -1,8 +1,9 @@
-import { useParams, useLocation } from "react-router-dom"
+import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 // import shoeData from "../data.js"
 import styled from 'styled-components'
 import TabUi  from "../Components/tabUi"
+import { Button } from "react-bootstrap"
 
 // styled component 실습
 
@@ -29,13 +30,15 @@ const YellowBox = styled.div`
 function DetailView() {
   // const [shoes] = useState(shoeData)
   const location = useLocation()
-  const shoes = location.state.shoes
+  const shoes = location.state.shoes 
   const { shoeId } = useParams()
   const [timer, setTimer] = useState(true)
   const shoe = shoes.find((x) => {
     return x.id === parseInt(shoeId)
   })
   const [text, setText] = useState('')
+  const [fade, setFade] = useState('')
+  const navigation = useNavigate()
 
   // useEffect
   useEffect(() => {
@@ -44,6 +47,10 @@ function DetailView() {
       clearTimeout(browserTimer) // 타이머를 제거함(안전하게 사용가능)
     }
   }, [])
+
+  useEffect(()=> {
+    setTimeout(()=>{setFade('detailEnd')}, 100)
+  })
 
   // useEffect(()=> {
   //   if (isNaN(text.trim())) {
@@ -63,12 +70,13 @@ function DetailView() {
   }
 
   return (
-    <div className="container">
+    <div className={`container detailStart ${fade}`}>
       {
         timer === true ?
           <YellowBox>2초 이내 구매시 할인</YellowBox>
           : null
       }
+      <Button className="mt-2" onClick={()=> {navigation(-1)}}>뒤로가기</Button>
       <div className="row">
         <div className="col-md-6">
           <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="100%" />
