@@ -87,6 +87,8 @@ function ShoesList() {
       {
         loading === true ?
           shoes.map((shoe) => {
+            const shoeImg = `https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`
+
             return (
               <div className="col-md-4" key={shoe.id}>
                 <Link
@@ -94,7 +96,15 @@ function ShoesList() {
                   state={{ shoes: shoes }}
                   key={shoe.id}
                   className='nav-link'>
-                  <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="80%" />
+                  <img
+                    alt={`shoe${shoe.id}`}
+                    src={shoeImg}
+                    width="80%"
+                    onError={(e)=>{
+                      e.target.onerror=null
+                      e.target.src="/noImg.png"
+                    }}
+                  />
                 </Link>
                 <h4>{shoe.title}</h4>
                 <p> {shoe.price}원 </p>

@@ -39,6 +39,7 @@ function DetailView() {
   const [text, setText] = useState('')
   const [fade, setFade] = useState('')
   const navigation = useNavigate()
+  const shoeImg = `https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`
 
   // useEffect
   useEffect(() => {
@@ -79,7 +80,15 @@ function DetailView() {
       <Button className="mt-2" onClick={()=> {navigation(-1)}}>뒤로가기</Button>
       <div className="row">
         <div className="col-md-6">
-          <img alt={`shoe${shoe.id}`} src={`https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`} width="100%" />
+          <img 
+          alt={`shoe${shoe.id}`} 
+          src={shoeImg} 
+          width="100%"
+          onError={(e)=> {
+            e.target.onerror = null
+            e.target.src = "/noImg.png"
+          }}
+          />
         </div>
         <div className="col-md-6 mt-4 text-center">
           <input
