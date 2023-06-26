@@ -1,18 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import user from './userSlice.js'
 
-// const user = createSlice({ // useState와 비슷함
-//   name: 'user',
-//   initialState: { name: 'kim', age: 20 },
-//   reducers: {
-//     changeName(state) {
-//       state.name = 'park'
-//     },
-//     changeAge(state) {
-//       state.age += 1
-//     }
-//   }
-// })
 
 const cart = createSlice({
   name: 'cart',
@@ -29,7 +17,27 @@ const cart = createSlice({
       }
     },
     orderShoe(state, action) {
-      state.push(action.payload)
+      const inCart = state.find((el)=>el.id === action.payload.id)
+      if (inCart === undefined) {
+        state.push(
+          {
+            id: action.payload.id,
+            name: action.payload.title,
+            count: 1
+          }
+        )
+        alert('상품이 추가되었습니다.')
+      }
+      else{
+        alert('상품이 장바구니에 존재합니다.')
+        // 주문하기 버튼 누를 때 이미 상품이 state안에 있으면 추가가 아니라 기존 항목 수량증가만?
+      }
+    },
+    deleteShoe(state, action){
+      const cartIdx = state.findIndex(cartItem => cartItem.id === action.payload)
+      if (cartIdx !== -1) {
+        state.splice(cartIdx, 1)
+      }
     }
   }
 })
@@ -42,4 +50,4 @@ export default configureStore({ // state 등록
 })
 
 
-export const { changeCartNum, orderShoe } = cart.actions
+export const { changeCartNum, orderShoe, deleteShoe } = cart.actions
