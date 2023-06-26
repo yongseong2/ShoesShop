@@ -1,16 +1,20 @@
 import { Table } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
-import { changeName, changeCartNum } from "../store"
+import { changeName, changeAge } from "./../store/userSlice"
+import { changeCartNum } from "../store/store"
 
 function CartView() {
   const carts = useSelector((state) => state.cart)
-  const user = useSelector((state)=> state.user)
+  const user = useSelector((state)=> state.user.name)
+  const age = useSelector((state)=>state.user.age)
   const dispatch = useDispatch()
 
   return (
     <div className="container">
       <h2 className="m-3 text-center ">{user}의 장바구니</h2>
+      <h2 className="m-3 text-center ">{age} 쨜</h2>
       <button onClick={()=>dispatch(changeName())}>이름바꾸기</button>
+      <button onClick={()=>dispatch(changeAge())}>나이 올리기</button>
       <Table>
         <thead>
           <tr>

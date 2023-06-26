@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import styled from 'styled-components'
 import TabUi  from "../Components/tabUi"
 import { Button } from "react-bootstrap"
+import { useDispatch } from "react-redux"
+import { orderShoe } from "./../store/store"
 
 // styled component 실습
 
@@ -41,6 +43,8 @@ function DetailView() {
   const navigation = useNavigate()
   const shoeImg = `https://codingapple1.github.io/shop/shoes${shoe.id + 1}.jpg`
 
+  // useDispatch
+  const dispatch = useDispatch()
   // useEffect
   useEffect(() => {
     const browserTimer = setTimeout(() => { setTimer(false) }, 2000)
@@ -100,7 +104,10 @@ function DetailView() {
           <h4 className="pt-5">{shoe.title}</h4>
           <p>{shoe.content}</p>
           <p>{shoe.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button 
+          className="btn btn-danger"
+          onClick={()=>dispatch(orderShoe(shoe))}
+          >주문하기</button>
         </div>
       </div>
       <div>
