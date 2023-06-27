@@ -1,34 +1,16 @@
 // import { useState } from 'react';
 import './App.css';
-import { Navbar, Container, Nav } from 'react-bootstrap'
 import ShoesList from './Components/shoesList.js';
-import { Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import DetailView from './Views/DetailView';
 import CartView from './Views/CartView'
-import {GiShoppingCart} from 'react-icons/gi'
+import NavBarCom from './Components/NavBarCom';
 
 
 function App() {
-
-  const navigate = useNavigate()
-
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home" onClick={()=>{navigate('/')}}>Home</Navbar.Brand>
-          <Nav className="me-auto">
-            {/* <Link to="/detail/:id" className='nav-link'>Detail</Link> */}
-            <Link to="/about" className='nav-link'>About</Link>
-          </Nav>
-          <Nav>
-            <Link to="/cart" className='nav-link'>
-              장바구니 <GiShoppingCart size="25"/>
-            </Link>
-          </Nav>
-        </Container>
-      </Navbar>
-
+      <NavBarCom/>
       <Routes>
         <Route path='/' element={
           <>

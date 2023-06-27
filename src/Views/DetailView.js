@@ -6,6 +6,7 @@ import TabUi  from "../Components/tabUi"
 import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import { orderShoe } from "./../store/store"
+import { saveRecent } from "../store/recentSlice"
 
 // styled component 실습
 
@@ -62,6 +63,10 @@ function DetailView() {
   //     window.alert('돌아가세요~')
   //   }
   // }, [text]) // 변화를 감지함
+
+  useEffect(()=> {
+    dispatch(saveRecent(shoe))
+  })
 
   // functions
   function getText(e) {

@@ -95,7 +95,8 @@ function ShoesList() {
                   to={`/detail/${shoe.id}`}
                   state={{ shoes: shoes }}
                   key={shoe.id}
-                  className='nav-link'>
+                  className='nav-link'
+                  >
                   <img
                     alt={`shoe${shoe.id}`}
                     src={shoeImg}

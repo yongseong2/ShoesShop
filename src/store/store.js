@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import user from './userSlice.js'
+import recent from './recentSlice.js'
 
 
 const cart = createSlice({
@@ -55,9 +56,9 @@ const cart = createSlice({
 export default configureStore({ // state 등록
   reducer: {
     user: user.reducer,
-    cart: cart.reducer
+    cart: cart.reducer,
+    recent: recent.reducer
   }
 })
-
 
 export const { changeCartNum, minusCartNum, orderShoe, deleteShoe } = cart.actions
