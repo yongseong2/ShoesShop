@@ -1,14 +1,14 @@
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav, NavLink } from 'react-bootstrap'
 import { GiShoppingCart } from 'react-icons/gi'
 import { Link, useNavigate } from 'react-router-dom'
 import RecentShoe from './RecentShoe'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 
 function NavBarCom() {
   const navigate = useNavigate()
-  // const showRecent = useState(false)
-  
+  const [showRecent, setShowRecent] = useState(false)
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -16,8 +16,11 @@ function NavBarCom() {
           <Navbar.Brand href="#home" onClick={() => { navigate('/') }}>Home</Navbar.Brand>
           <Nav className="me-auto">
             {/* <Link to="/detail/:id" className='nav-link'>Detail</Link> */}
-            <Link to="/about" className='nav-link'>About</Link>
-          {/* <NavLink>최근 본 상품</NavLink> */}
+            {/* <Link to="/about" className='nav-link'>About</Link> */}
+            <NavLink
+              onClick={() =>
+                setShowRecent(!showRecent)}
+            >최근 본 상품</NavLink>
           </Nav>
           <Nav>
             <Link to="/cart" className='nav-link'>
@@ -26,7 +29,11 @@ function NavBarCom() {
           </Nav>
         </Container>
       </Navbar>
-      <RecentShoe/>
+      {
+        showRecent === true ?
+          <RecentShoe /> :
+          null
+      }
     </>
   )
 }
